@@ -62,7 +62,7 @@ var TodoItem = React.createClass({
 
   _onToggleComplete: function() {
     AppActions.toggleComplete(this.props.todo);
-  },
+  }
 
 
 });

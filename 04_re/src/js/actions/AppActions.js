@@ -24,6 +24,19 @@ var AppActions = {
     });
   },
 
+    /**
+   * @param  {string} id The ID of the ToDo item
+   * @param  {string} text
+   */
+  updateText: function(id, text) {
+    AppDispatcher.dispatch({
+      actionType: AppConstants.TODO_UPDATE_TEXT,
+      id: id,
+      text: text
+    });
+  },
+
+
   /**
    * Toggle whether a single ToDo is complete
    * @param  {object} todo
@@ -41,7 +54,18 @@ var AppActions = {
         id: id
       });
     }
+  },
+
+  /**
+   * @param  {string} id
+   */
+  destroy: function(id) {
+    AppDispatcher.dispatch({
+      actionType: AppConstants.TODO_DESTROY,
+      id: id
+    });
   }
+
 
 
 

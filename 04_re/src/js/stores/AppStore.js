@@ -48,6 +48,15 @@ function update(id, updates) {
   console.log(_todos[id]);
 }
 
+/**
+ * Delete a TODO item.
+ * @param  {string} id
+ */
+function destroy(id) {
+  delete _todos[id];
+}
+
+
 var AppStore = assign({}, EventEmitter.prototype, {
 
   /**
@@ -109,6 +118,19 @@ var AppStore = assign({}, EventEmitter.prototype, {
 
     case AppConstants.TODO_COMPLETE:
       update(action.id, {complete: true});
+      AppStore.emitChange();
+      break;
+
+    case AppConstants.TODO_UPDATE_TEXT:
+      text = action.text.trim();
+      if (text !== '') {
+        update(action.id, {text: text});
+        AppStore.emitChange();
+      }
+      break;
+
+    case AppConstants.TODO_DESTROY:
+      destroy(action.id);
       AppStore.emitChange();
       break;
 

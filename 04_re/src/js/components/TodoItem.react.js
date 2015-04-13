@@ -10,6 +10,7 @@
 var React = require('react');
 var ReactPropTypes = React.PropTypes;
 var AppActions = require('../actions/AppActions');
+var TodoTextInput = require('./TodoTextInput.react');
 
 var cx = require('react/lib/cx');
 
@@ -31,6 +32,15 @@ var TodoItem = React.createClass({
   render: function() {
     var todo = this.props.todo;
 
+    var input;
+      if (this.state.isEditing) {
+        input =
+          <TodoTextInput
+            className="edit"
+            onSave={this._onSave}
+            value={todo.text}
+          />;
+      }
     // List items should get the class 'editing' when editing
     // and 'completed' when marked as completed.
     // Note that 'completed' is a classification while 'complete' is a state.
@@ -52,17 +62,34 @@ var TodoItem = React.createClass({
             checked={todo.complete}
             onChange={this._onToggleComplete}
           />
-          <label >
+          <label onDoubleClick={this._onDoubleClick}>
             {todo.text}
           </label>
+          <button className="destroy" onClick={this._onDestroyClick} />
         </div>
+          {input}
       </li>
     );
   },
 
   _onToggleComplete: function() {
     AppActions.toggleComplete(this.props.todo);
+  },
+
+  _onDoubleClick: function() {
+    this.setState({isEditing: true});
+    console.log(this.state.isEditing);
+  },
+
+  _onSave: function(text) {
+    AppActions.updateText(this.props.todo.id, text);
+    this.setState({isEditing: false});
+  },
+
+  _onDestroyClick: function() {
+    AppActions.destroy(this.props.todo.id);
   }
+
 
 
 });

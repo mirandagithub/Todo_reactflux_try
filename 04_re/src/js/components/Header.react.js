@@ -36,7 +36,6 @@ var Header = React.createClass({
    * @param {string} text
    */
   _onSave: function(text) {
-    console.log('save new item');
     if (text.trim()){
       AppActions.create(text);
     }

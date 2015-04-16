@@ -24,7 +24,7 @@ var AppActions = {
     });
   },
 
-  /**
+    /**
    * @param  {string} id The ID of the ToDo item
    * @param  {string} text
    */
@@ -35,6 +35,7 @@ var AppActions = {
       text: text
     });
   },
+
 
   /**
    * Toggle whether a single ToDo is complete
@@ -59,12 +60,11 @@ var AppActions = {
    * Mark all ToDos as complete
    */
   toggleCompleteAll: function() {
-        console.log('d c');
-
     AppDispatcher.dispatch({
       actionType: AppConstants.TODO_TOGGLE_COMPLETE_ALL
     });
   },
+
 
   /**
    * @param  {string} id
@@ -84,7 +84,6 @@ var AppActions = {
       actionType: AppConstants.TODO_DESTROY_COMPLETED
     });
   }
-
 };
 
 module.exports = AppActions;
